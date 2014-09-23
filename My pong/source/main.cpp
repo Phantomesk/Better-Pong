@@ -179,11 +179,13 @@ struct PongBall
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
+			/*playerScore1[10] += 1;*/ //wont work yet makes players score go up
 		}
 		if (x < 0)
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
+			/*playerScore2[10] += 1;*/ //wont work yet
 		}
 		/*if (ball.rightBoundry >= paddle2.leftBoundry)
 		{
