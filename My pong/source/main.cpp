@@ -16,6 +16,13 @@ enum GAMESTATES
 	EXIT_GAME
 };
 
+struct Collision
+{
+	float xMin;
+	float yMin;
+	float xMax;
+	float yMax;
+};
 
 
 struct Paddle1
@@ -23,6 +30,7 @@ struct Paddle1
 	unsigned int iPaddle1ID;
 	float x;
 	float y;
+	Collision box;
 	float ySpeed = 250.f;
 	float width1;
 	float height1;
@@ -68,65 +76,15 @@ struct Paddle1
 				y = height1-50;
 			}
 		}
+		box.xMin = x - (width1 * .5f);
+		box.yMin = y - (height1 * .5f);
+		box.xMax = x + (width1 * .5f);
+		box.yMax = y + (height1 * .5f);
+		
 		MoveSprite(iPaddle1ID, x, y);
 	}
 };
-Paddle1 paddle1;
-
-struct Paddle2
-{
-	unsigned int iPaddle2ID;
-	float x;
-	float y;
-	float ySpeed = 250.f;
-	float width2;
-	float height2;
-	float upperBoundry = y + height2*.5f;
-	float lowerBoundry = y - height2*.5f;
-	float leftBoundry = x - width2*.5f;
-	unsigned int iMoveUpKey;
-	unsigned int iMoveDownKey;
-	
-	void SetSize(float a_width1, float a_height1)
-	{
-		width2 = a_width1;
-		height2 = a_height1;
-	}
-
-	void SetPosition(float a_x, float a_y)
-	{
-		x = a_x;
-		y = a_y;
-	}
-
-	void SetMovementKeys(unsigned int a_moveUp, unsigned int a_moveDown)
-	{
-		iMoveUpKey = a_moveUp;
-		iMoveDownKey = a_moveDown;
-	}
-
-	void Movement(float a_fDeltaTime)
-	{
-		if (IsKeyDown(iMoveUpKey))
-		{
-			y += ySpeed * a_fDeltaTime;;
-			if (y > iScreenHeight - 105)
-			{
-				y = iScreenHeight - 105;
-			}
-		}
-		if (IsKeyDown(iMoveDownKey))
-		{
-			y -= ySpeed * a_fDeltaTime;
-			if (y < height2 - 50)
-			{
-				y = height2 - 50;
-			}
-		}
-		MoveSprite(iPaddle2ID, x, y);
-	}
-};
-Paddle2 paddle2;
+Paddle1 paddle1, paddle2;
 
 struct Block
 {
@@ -143,6 +101,7 @@ struct PongBall
 	unsigned int iBallID;
 	float x;
 	float y;
+	Collision box;
 	float xSpeed = .1f;
 	float ySpeed = .1f;
 	float ballWidth;
@@ -161,6 +120,7 @@ struct PongBall
 		x = a_x;
 		y = a_y;
 	}
+
 	void Movement()
 	{
 		x = (xSpeed + x);
@@ -185,14 +145,10 @@ struct PongBall
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
 		}
-		/*if (rightBoundry >= paddle2.leftBoundry) //failed paddle collision
-		{
-			xSpeed *= -1;
-		}
-		if (leftBoundry <= paddle1.rightBoundry) //failed paddle collision
-		{
-			xSpeed *= -1;
-		}*/
+		box.xMin = x - (ballWidth * .5f);
+		box.yMin = y - (ballHeight * .5f);
+		box.xMax = x + (ballWidth * .5f);
+		box.yMax = y + (ballHeight * .5f);
 	}
 };
 PongBall ball;
@@ -204,8 +160,30 @@ void UpdateGamePlay();
 void UpdateHighScore();
 void UpdateGameOverScreen();
 
+bool CollisionCheck(Collision box1, Collision box2)
+{
+	if (box1.xMin > box2.xMin && box1.yMin > box2.yMin && box1.xMin < box2.xMax && box1.yMin < box2.yMax)
+	{
+		return true;
+	}
+	if (box1.xMax > box2.xMin && box1.yMax > box2.yMin && box1.xMax < box2.xMax && box1.yMax < box2.yMax)
+	{
+		return true;
+	}
+	if (box1.xMin > box2.xMin && box1.yMax > box2.yMin && box1.xMin < box2.xMax && box1.yMax < box2.yMax)
+	{
+		return true;
+	}
+	if (box1.xMax > box2.xMin && box1.yMin > box2.yMin && box1.xMax < box2.xMax && box1.yMin < box2.yMax)
+	{
+		return true;
+	}
+	return false;
+}
+
 int main( int argc, char* argv[] )
 {
+
     Initialise(iScreenWidth, iScreenHeight, false, "Ping");
     
     SetBackgroundColour(SColour(0, 0, 0, 255));
@@ -215,19 +193,19 @@ int main( int argc, char* argv[] )
 	ball.SetSize(28.f, 28.f);
 
 	paddle1.SetPosition(paddle1.width1, iScreenHeight*.5f);
-	paddle2.SetPosition(iScreenWidth - paddle2.width2, iScreenHeight*.5f);
+	paddle2.SetPosition(iScreenWidth - paddle2.width1, iScreenHeight*.5f);
 	ball.SetPosition(iScreenWidth*.5f, iScreenHeight*.5f);
 
 	paddle1.SetMovementKeys('W', 'S');
 	paddle2.SetMovementKeys(GLFW_KEY_UP, GLFW_KEY_DOWN);
 	
 	paddle1.iPaddle1ID = CreateSprite("./images/Paddle.jpg", paddle1.width1, paddle1.height1, true);
-	paddle2.iPaddle2ID = CreateSprite("./images/Paddle.jpg", paddle2.width2, paddle2.height2, true);
+	paddle2.iPaddle1ID = CreateSprite("./images/Paddle.jpg", paddle2.width1, paddle2.height1, true);
 	ball.iBallID = CreateSprite("./images/Ball.jpg", ball.ballWidth, ball.ballHeight, true);
 	wall.Blocker = CreateSprite("./images/Wall.png", wall.width, wall.height, true);
 
 	DrawSprite(paddle1.iPaddle1ID);
-	DrawSprite(paddle2.iPaddle2ID);
+	DrawSprite(paddle2.iPaddle1ID);
 	DrawSprite(ball.iBallID);
 	DrawSprite(wall.Blocker);
 
@@ -247,6 +225,9 @@ int main( int argc, char* argv[] )
 		case HIGHSCORE:
 			UpdateHighScore();
 			break;
+
+		case EXIT_GAME:
+			return 0;
 
 		default:
 			break;
@@ -278,7 +259,6 @@ void UpdateMainMenu()
 	if (IsKeyDown(GLFW_KEY_ESCAPE))
 	{
 		eCurrentState = EXIT_GAME;
-		Shutdown();
 	}
 	
 	ClearScreen();
@@ -287,23 +267,32 @@ void UpdateMainMenu()
 void UpdateGamePlay()
 {
 		float fDeltaTime = GetDeltaTime();
+		
+		paddle1.Movement(fDeltaTime);
+		paddle2.Movement(fDeltaTime);
+		ball.Movement();
+
+		if (CollisionCheck(paddle1.box, ball.box) && ball.xSpeed < 0)
+		{
+			ball.xSpeed *= -1;
+		}
+		if (CollisionCheck(paddle2.box, ball.box) && ball.xSpeed > 0)
+		{
+			ball.xSpeed *= -1;
+		}
 
 		MoveSprite(paddle1.iPaddle1ID, paddle1.x, paddle1.y);
-		MoveSprite(paddle2.iPaddle2ID, paddle2.x, paddle2.y);
+		MoveSprite(paddle2.iPaddle1ID, paddle2.x, paddle2.y);
 		MoveSprite(ball.iBallID, ball.x, ball.y);
 		MoveSprite(wall.Blocker, wall.x, wall.y);
 
 		DrawSprite(paddle1.iPaddle1ID);
-		DrawSprite(paddle2.iPaddle2ID);
+		DrawSprite(paddle2.iPaddle1ID);
 		DrawSprite(ball.iBallID);
 		DrawSprite(wall.Blocker);
 
 		DrawString(playerScore1, iScreenWidth*.3f, iScreenHeight - 2);
 		DrawString(playerScore2, iScreenWidth*.68f, iScreenHeight - 2);
-
-		paddle1.Movement(fDeltaTime);
-		paddle2.Movement(fDeltaTime);
-		ball.Movement();
 
 		if (IsKeyDown('E'))
 		{
