@@ -179,22 +179,20 @@ struct PongBall
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
-			playerScore1[10] += 1;
 		}
 		if (x < 0)
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
-			playerScore2[10] += 1;
 		}
-		if (rightBoundry >= paddle2.leftBoundry) //failed paddle collision
+		/*if (rightBoundry >= paddle2.leftBoundry) //failed paddle collision
 		{
 			xSpeed *= -1;
 		}
 		if (leftBoundry <= paddle1.rightBoundry) //failed paddle collision
 		{
 			xSpeed *= -1;
-		}
+		}*/
 	}
 };
 PongBall ball;
