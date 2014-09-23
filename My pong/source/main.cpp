@@ -125,14 +125,14 @@ struct PongBall
 	{
 		x = (xSpeed + x);
 		y = (ySpeed + y);
-		if (y > (wall.y - 20.f))
+		if (y > (wall.y - 20.f)) //upper collision
 		{
 			y = (wall.y - 20.f);
 			ySpeed *= -1;
 		}
-		if (y < (ballHeight - 15.f))
+		if (y < (ballHeight - 15.f)) //Bottom collision
 		{
-			y = (ballHeight -15.f);
+			y = (ballHeight - 15.f);
 			ySpeed *= -1;
 		}
 		if (x > iScreenWidth)
@@ -272,13 +272,15 @@ void UpdateGamePlay()
 		paddle2.Movement(fDeltaTime);
 		ball.Movement();
 
-		if (CollisionCheck(paddle1.box, ball.box) && ball.xSpeed < 0)
+		if (CollisionCheck(ball.box, paddle1.box) && ball.xSpeed < 0)
 		{
-			ball.xSpeed *= -1;
+			ball.xSpeed *= -1.1;
+			ball.ySpeed *= 1.1;
 		}
-		if (CollisionCheck(paddle2.box, ball.box) && ball.xSpeed > 0)
+		if (CollisionCheck(ball.box, paddle2.box) && ball.xSpeed > 0)
 		{
-			ball.xSpeed *= -1;
+			ball.xSpeed *= -1.1;
+			ball.ySpeed *= 1.1;
 		}
 
 		MoveSprite(paddle1.iPaddle1ID, paddle1.x, paddle1.y);
