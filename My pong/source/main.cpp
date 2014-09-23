@@ -28,7 +28,7 @@ struct Paddle1
 	float height1;
 	float upperBoundry = y + height1*.5f;
 	float lowerBoundry = y - height1*.5f;
-	float rightBoundry = y + width1*.5f;
+	float rightBoundry = x + width1*.5f;
 	unsigned int iMoveUpKey;
 	unsigned int iMoveDownKey;
 	
@@ -83,7 +83,7 @@ struct Paddle2
 	float height2;
 	float upperBoundry = y + height2*.5f;
 	float lowerBoundry = y - height2*.5f;
-	float leftBoundry = y - width2*.5f;
+	float leftBoundry = x - width2*.5f;
 	unsigned int iMoveUpKey;
 	unsigned int iMoveDownKey;
 	
@@ -179,22 +179,22 @@ struct PongBall
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
-			/*playerScore1[10] += 1;*/ //wont work yet makes players score go up
+			playerScore1[10] += 1;
 		}
 		if (x < 0)
 		{
 			x = iScreenWidth * .5f;
 			xSpeed *= -1;
-			/*playerScore2[10] += 1;*/ //wont work yet
+			playerScore2[10] += 1;
 		}
-		/*if (ball.rightBoundry >= paddle2.leftBoundry)
+		if (rightBoundry >= paddle2.leftBoundry) //failed paddle collision
 		{
-			ball.xSpeed *= -1;
-		}															//failed paddle and ball collision.
-		if (ball.leftBoundry <= paddle1.rightBoundry)
+			xSpeed *= -1;
+		}
+		if (leftBoundry <= paddle1.rightBoundry) //failed paddle collision
 		{
-			ball.xSpeed *= -1;
-		}*/
+			xSpeed *= -1;
+		}
 	}
 };
 PongBall ball;
