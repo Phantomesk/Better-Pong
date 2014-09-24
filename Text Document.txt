@@ -1,0 +1,41 @@
+Buttons
+	in game:
+		E = Pause/Main Menu
+
+		player 1 is on the left side of the screen:
+			Controls-
+				W = up
+				S = down
+
+		player 2 is on the right side of the screen:
+			Controls-
+				up arrow key = up
+				down arrow key = down
+
+	Main Menu:
+		Esc = Exit Game
+		Enter = Start Game (Resume if Pressed E in game)
+		W = Total wins by either Player 1 or Player 2
+
+	Player 1 win screen:
+		E = Main Menu
+		W = Total wins for both players
+		Enter = Start New Game
+
+	Player 2 win screen:
+		E = Main Menu
+		W = Total wins for both players
+		Enter = Start New Game
+
+	Total Wins:
+		E = Main Menu
+		Enter = Start Game (Start New Game if coming to check total score after a win)
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+************************************If you pause and go to total wins and press enter from that screen to resume game you will start over**************************************
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////////////////////////////////////////////////////

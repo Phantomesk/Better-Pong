@@ -4,15 +4,23 @@
 const int iScreenWidth = 900;
 const int iScreenHeight = 600;
 
-char playerScore1[10] = "0";
-char playerScore2[10] = "0";
+char playerScore1[10];
+char playerScore2[10];
+char player2total[10];
+char player1total[10];
+
+int score1 = 0;
+int score2 = 0;
+int total1 = 0;
+int total2 = 0;
 
 enum GAMESTATES
 {
 	MAIN_MENU,
 	GAMEPLAY,
 	HIGHSCORE,
-	GAMEOVER,
+	GAMEOVER1,
+	GAMEOVER2,
 	EXIT_GAME
 };
 
@@ -23,7 +31,6 @@ struct Collision
 	float xMax;
 	float yMax;
 };
-
 
 struct Paddle1
 {
@@ -123,28 +130,38 @@ struct PongBall
 
 	void Movement()
 	{
-		x = (xSpeed + x);
-		y = (ySpeed + y);
+
+		if (x < 0)
+		{
+			score2 += 1;
+			x = iScreenWidth * .5f;
+			xSpeed = .1f;
+			ySpeed = .1f;
+			xSpeed *= 1;
+		}
+		if (x > iScreenWidth)
+		{
+			score1 += 1;
+			x = iScreenWidth * .5f;
+			xSpeed = .1f;
+			ySpeed = .1f;
+			xSpeed *= -1;
+			
+		}
 		if (y > (wall.y - 20.f)) //upper collision
 		{
 			y = (wall.y - 20.f);
 			ySpeed *= -1;
 		}
-		if (y < (ballHeight - 15.f)) //Bottom collision
+		if (y < (ballHeight - 14.f)) //Bottom collision
 		{
-			y = (ballHeight - 15.f);
+			y = (ballHeight - 14.f);
 			ySpeed *= -1;
 		}
-		if (x > iScreenWidth)
-		{
-			x = iScreenWidth * .5f;
-			xSpeed *= -1;
-		}
-		if (x < 0)
-		{
-			x = iScreenWidth * .5f;
-			xSpeed *= -1;
-		}
+
+		x = (xSpeed + x);
+		y = (ySpeed + y);
+
 		box.xMin = x - (ballWidth * .5f);
 		box.yMin = y - (ballHeight * .5f);
 		box.xMax = x + (ballWidth * .5f);
@@ -158,7 +175,8 @@ GAMESTATES eCurrentState = MAIN_MENU;
 void UpdateMainMenu();
 void UpdateGamePlay();
 void UpdateHighScore();
-void UpdateGameOverScreen();
+void UpdateGameOverScreen1();
+void UpdateGameOverScreen2();
 
 bool CollisionCheck(Collision box1, Collision box2)
 {
@@ -188,6 +206,8 @@ int main( int argc, char* argv[] )
     
     SetBackgroundColour(SColour(0, 0, 0, 255));
 
+
+
 	paddle1.SetSize(30.f, 100.f);
 	paddle2.SetSize(30.f, 100.f);
 	ball.SetSize(28.f, 28.f);
@@ -204,11 +224,6 @@ int main( int argc, char* argv[] )
 	ball.iBallID = CreateSprite("./images/Ball.jpg", ball.ballWidth, ball.ballHeight, true);
 	wall.Blocker = CreateSprite("./images/Wall.png", wall.width, wall.height, true);
 
-	DrawSprite(paddle1.iPaddle1ID);
-	DrawSprite(paddle2.iPaddle1ID);
-	DrawSprite(ball.iBallID);
-	DrawSprite(wall.Blocker);
-
     //Game Loop
     do
     {
@@ -224,6 +239,14 @@ int main( int argc, char* argv[] )
 
 		case HIGHSCORE:
 			UpdateHighScore();
+			break;
+
+		case GAMEOVER1:
+			UpdateGameOverScreen1();
+			break;
+
+		case GAMEOVER2:
+			UpdateGameOverScreen2();
 			break;
 
 		case EXIT_GAME:
@@ -243,15 +266,16 @@ int main( int argc, char* argv[] )
 
 void UpdateMainMenu()
 {
-	DrawString("Welcome to Pong", iScreenWidth *.37f, iScreenHeight *.6f);
-	DrawString("Press Enter to start.", iScreenWidth*.37f, iScreenHeight*.5f);
-	DrawString("Press H for High Score", iScreenWidth * .37f, iScreenHeight * .4f);
+	DrawString("Welcome to Ping", iScreenWidth *.35f, iScreenHeight *.7f);
+	DrawString("Press Enter to start.", iScreenWidth*.35f, iScreenHeight*.6f);
+	DrawString("Press W for Wins", iScreenWidth * .35f, iScreenHeight * .5f);
+	DrawString("Press Esc to exit.", iScreenWidth*.35f, iScreenHeight*.4f);
 	if (IsKeyDown(GLFW_KEY_ENTER))
 	{
 		eCurrentState = GAMEPLAY;
 		ClearScreen();
 	}
-	if (IsKeyDown('H'))
+	if (IsKeyDown('W'))
 	{
 		eCurrentState = HIGHSCORE;
 		ClearScreen();
@@ -266,55 +290,70 @@ void UpdateMainMenu()
 
 void UpdateGamePlay()
 {
-		float fDeltaTime = GetDeltaTime();
+	float fDeltaTime = GetDeltaTime();
+	
+	paddle1.Movement(fDeltaTime);
+	paddle2.Movement(fDeltaTime);
+	ball.Movement();
+
+	if (CollisionCheck(ball.box, paddle1.box) && ball.xSpeed < 0)
+	{
+		ball.xSpeed *= -1.1;
+		ball.ySpeed *= 1.1;
+	}
+	if (CollisionCheck(ball.box, paddle2.box) && ball.xSpeed > 0)
+	{
+		ball.xSpeed *= -1.1;
+		ball.ySpeed *= 1.1;
+	}
+
+	MoveSprite(ball.iBallID, ball.x, ball.y);
+	MoveSprite(wall.Blocker, wall.x, wall.y);
+
+	DrawSprite(paddle1.iPaddle1ID);
+	DrawSprite(paddle2.iPaddle1ID);
+	DrawSprite(ball.iBallID);
+	DrawSprite(wall.Blocker);
+
+	DrawString(playerScore1, iScreenWidth*.1f, iScreenHeight - 2);
+	DrawString(playerScore2, iScreenWidth*.9f, iScreenHeight - 2);
+	DrawString("Press E to pause game at Main Menu", iScreenWidth*.25f, iScreenHeight - 2);
+
+	if (IsKeyDown('E'))
+	{
+		eCurrentState = MAIN_MENU;
+		ClearScreen();
+	}
 		
-		paddle1.Movement(fDeltaTime);
-		paddle2.Movement(fDeltaTime);
-		ball.Movement();
+	itoa(score1, playerScore1, 10);
+	itoa(score2, playerScore2, 10);
 
-		if (CollisionCheck(ball.box, paddle1.box) && ball.xSpeed < 0)
-		{
-			ball.xSpeed *= -1.1;
-			ball.ySpeed *= 1.1;
-		}
-		if (CollisionCheck(ball.box, paddle2.box) && ball.xSpeed > 0)
-		{
-			ball.xSpeed *= -1.1;
-			ball.ySpeed *= 1.1;
-		}
+	if (score1 == 10)
+	{
+		total1 += 1;
+		eCurrentState = GAMEOVER1;
+	}
+	if (score2 == 10)
+	{
+		total2 += 1;
+		eCurrentState = GAMEOVER2;
+	}
 
-		MoveSprite(paddle1.iPaddle1ID, paddle1.x, paddle1.y);
-		MoveSprite(paddle2.iPaddle1ID, paddle2.x, paddle2.y);
-		MoveSprite(ball.iBallID, ball.x, ball.y);
-		MoveSprite(wall.Blocker, wall.x, wall.y);
+	itoa(total1, player1total, 10);
+	itoa(total2, player2total, 10);
 
-		DrawSprite(paddle1.iPaddle1ID);
-		DrawSprite(paddle2.iPaddle1ID);
-		DrawSprite(ball.iBallID);
-		DrawSprite(wall.Blocker);
-
-		DrawString(playerScore1, iScreenWidth*.3f, iScreenHeight - 2);
-		DrawString(playerScore2, iScreenWidth*.68f, iScreenHeight - 2);
-
-		if (IsKeyDown('E'))
-		{
-			eCurrentState = MAIN_MENU;
-			ClearScreen();
-		}
-		
-        ClearScreen();
+       ClearScreen();
 }
 
 void UpdateHighScore()
 {
-	DrawString("1st : 25", iScreenWidth*.45f, iScreenHeight*.7f);
-	DrawString("2nd : 20", iScreenWidth *.45f, iScreenHeight *.6f);
-	DrawString("3rd : 15", iScreenWidth*.45f, iScreenHeight * .5f);
-	DrawString("4th : 10", iScreenWidth *.45f, iScreenHeight * .4f);
-	DrawString("5th : 5", iScreenWidth * .45f, iScreenHeight*.3f);
+	DrawString("Player 1 :", iScreenWidth*.35f, iScreenHeight*.55f);
+	DrawString("Player 2 :", iScreenWidth *.35f, iScreenHeight *.45f);
+	DrawString(player1total, iScreenWidth*.5f, iScreenHeight*.55f);
+	DrawString(player2total, iScreenWidth *.5f, iScreenHeight *.45f);
 	DrawString("Press E to go to Main Menu", iScreenWidth*.025, iScreenHeight - 2);
 	DrawString("Press Enter to start game", iScreenWidth* .6f, iScreenHeight - 2);
-	
+
 	if (IsKeyDown('E'))
 	{
 		eCurrentState = MAIN_MENU;
@@ -322,9 +361,59 @@ void UpdateHighScore()
 	}
 	if (IsKeyDown(GLFW_KEY_ENTER))
 	{
+		score1 = 0;
+		score2 = 0;
+
 		eCurrentState = GAMEPLAY;
+
 		ClearScreen();
 	}
 	
+	ClearScreen();
+}
+
+void UpdateGameOverScreen1()
+{
+	DrawString("Player 1 has one", iScreenWidth*.35f, iScreenHeight * .7f);
+	DrawString("Press Enter to start", iScreenWidth*.35f, iScreenHeight*.6f);
+	DrawString("Press E to go to Main Menu", iScreenWidth*.35f, iScreenHeight*.5f);
+	DrawString("Press W for Wins", iScreenWidth * .35f, iScreenHeight * .4f);
+
+	if (IsKeyDown(GLFW_KEY_ENTER))
+	{
+		eCurrentState = GAMEPLAY;
+	}
+	if (IsKeyDown('E'))
+	{
+		eCurrentState = MAIN_MENU;
+	}
+	if (IsKeyDown('W'))
+	{
+		eCurrentState = HIGHSCORE;
+	}
+
+	ClearScreen();
+}
+
+void UpdateGameOverScreen2()
+{
+	DrawString("Player 2 has one", iScreenWidth*.35f, iScreenHeight * .7f);
+	DrawString("Press Enter to start new game", iScreenWidth*.35f, iScreenHeight*.6f);
+	DrawString("Press E to go to Main Menu", iScreenWidth*.35f, iScreenHeight*.5f);
+	DrawString("Press W for Wins", iScreenWidth * .35f, iScreenHeight * .4f);
+
+	if (IsKeyDown(GLFW_KEY_ENTER))
+	{
+		eCurrentState = GAMEPLAY;
+	}
+	if (IsKeyDown('E'))
+	{
+		eCurrentState = MAIN_MENU;
+	}
+	if (IsKeyDown('H'))
+	{
+		eCurrentState = HIGHSCORE;
+	}
+
 	ClearScreen();
 }
