@@ -1,7 +1,7 @@
 ﻿#include "AIE.h"
 #include <iostream>
 
-const int iScreenWidth = 900;
+const int iScreenWidth = 900;	// screen size
 const int iScreenHeight = 600;
 
 char playerScore1[10];
@@ -18,8 +18,8 @@ enum GAMESTATES
 {
 	MAIN_MENU,
 	GAMEPLAY,
-	HIGHSCORE,
-	GAMEOVER1,
+	TOTALWINS,
+	GAMEOVER1,	//the different gamestates of my game
 	GAMEOVER2,
 	EXIT_GAME
 };
@@ -28,7 +28,7 @@ struct Collision
 {
 	float xMin;
 	float yMin;
-	float xMax;
+	float xMax;		//collision structure
 	float yMax;
 };
 
@@ -97,7 +97,7 @@ struct Block
 {
 	unsigned int Blocker;
 	int x = iScreenWidth*.5f;
-	int y = iScreenHeight - 45;
+	int y = iScreenHeight - 45;	//structure for block between score and ball
 	int width = iScreenWidth;
 	int height = 20.f;
 };
@@ -153,7 +153,7 @@ struct PongBall
 			y = (wall.y - 20.f);
 			ySpeed *= -1;
 		}
-		if (y < (ballHeight - 14.f)) //Bottom collision
+		if (y < (ballHeight - 14.f)) //lower collision
 		{
 			y = (ballHeight - 14.f);
 			ySpeed *= -1;
@@ -174,7 +174,7 @@ GAMESTATES eCurrentState = MAIN_MENU;
 
 void UpdateMainMenu();
 void UpdateGamePlay();
-void UpdateHighScore();
+void UpdateTotalWins();
 void UpdateGameOverScreen1();
 void UpdateGameOverScreen2();
 
@@ -237,8 +237,8 @@ int main( int argc, char* argv[] )
 			UpdateGamePlay();
 			break;
 
-		case HIGHSCORE:
-			UpdateHighScore();
+		case TOTALWINS:
+			UpdateTotalWins();
 			break;
 
 		case GAMEOVER1:
@@ -277,7 +277,7 @@ void UpdateMainMenu()
 	}
 	if (IsKeyDown('W'))
 	{
-		eCurrentState = HIGHSCORE;
+		eCurrentState = TOTALWINS;
 		ClearScreen();
 	}
 	if (IsKeyDown(GLFW_KEY_ESCAPE))
@@ -345,7 +345,7 @@ void UpdateGamePlay()
        ClearScreen();
 }
 
-void UpdateHighScore()
+void UpdateTotalWins()
 {
 	DrawString("Player 1 :", iScreenWidth*.35f, iScreenHeight*.55f);
 	DrawString("Player 2 :", iScreenWidth *.35f, iScreenHeight *.45f);
@@ -389,7 +389,7 @@ void UpdateGameOverScreen1()
 	}
 	if (IsKeyDown('W'))
 	{
-		eCurrentState = HIGHSCORE;
+		eCurrentState = TOTALWINS;
 	}
 
 	ClearScreen();
@@ -412,7 +412,7 @@ void UpdateGameOverScreen2()
 	}
 	if (IsKeyDown('H'))
 	{
-		eCurrentState = HIGHSCORE;
+		eCurrentState = TOTALWINS;
 	}
 
 	ClearScreen();
