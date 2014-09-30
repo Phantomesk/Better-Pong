@@ -41,9 +41,6 @@ struct Paddle1
 	float ySpeed = 250.f;
 	float width1;
 	float height1;
-	float upperBoundry = y + height1*.5f;
-	float lowerBoundry = y - height1*.5f;
-	float rightBoundry = x + width1*.5f;
 	unsigned int iMoveUpKey;
 	unsigned int iMoveDownKey;
 	
@@ -113,8 +110,7 @@ struct PongBall
 	float ySpeed = .1f;
 	float ballWidth;
 	float ballHeight;
-	float rightBoundry = ballWidth*.5f;
-	float leftBoundry = ballWidth*.5f;
+
 
 	void SetSize(float a_ballWidth, float a_ballHeight)
 	{
