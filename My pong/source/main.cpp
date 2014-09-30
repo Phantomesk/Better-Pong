@@ -106,11 +106,10 @@ struct PongBall
 	float x;
 	float y;
 	Collision box;
-	float xSpeed = .1f;
-	float ySpeed = .1f;
+	float xSpeed = .2f;
+	float ySpeed = .2f;
 	float ballWidth;
 	float ballHeight;
-
 
 	void SetSize(float a_ballWidth, float a_ballHeight)
 	{
@@ -142,7 +141,6 @@ struct PongBall
 			xSpeed = .1f;
 			ySpeed = .1f;
 			xSpeed *= -1;
-			
 		}
 		if (y > (wall.y - 20.f)) //upper collision
 		{
@@ -201,8 +199,6 @@ int main( int argc, char* argv[] )
     Initialise(iScreenWidth, iScreenHeight, false, "Ping");
     
     SetBackgroundColour(SColour(0, 0, 0, 255));
-
-
 
 	paddle1.SetSize(30.f, 100.f);
 	paddle2.SetSize(30.f, 100.f);
@@ -294,13 +290,13 @@ void UpdateGamePlay()
 
 	if (CollisionCheck(ball.box, paddle1.box) && ball.xSpeed < 0)
 	{
-		ball.xSpeed *= -1.1;
-		ball.ySpeed *= 1.1;
+		ball.xSpeed *= -1.25;
+		ball.ySpeed *= 1.25;
 	}
 	if (CollisionCheck(ball.box, paddle2.box) && ball.xSpeed > 0)
 	{
-		ball.xSpeed *= -1.1;
-		ball.ySpeed *= 1.1;
+		ball.xSpeed *= -1.25;
+		ball.ySpeed *= 1.25;
 	}
 
 	MoveSprite(ball.iBallID, ball.x, ball.y);
@@ -338,7 +334,7 @@ void UpdateGamePlay()
 	itoa(total1, player1total, 10);
 	itoa(total2, player2total, 10);
 
-       ClearScreen();
+    ClearScreen();
 }
 
 void UpdateTotalWins()

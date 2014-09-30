@@ -1,47 +1,43 @@
-﻿Build started 9/30/2014 11:48:12 AM.
+﻿Build started 9/30/2014 3:24:49 PM.
      1>Project "C:\Users\jacob.mccoy\Documents\GitHub\Better-Pong\My pong\AIE Template.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I./ /I./include/ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\\" /Fd"obj\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\main.cpp
          main.cpp
      1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(96): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(99): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(218): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(219): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(220): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(265): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(266): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(267): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(268): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(297): warning C4305: '*=' : truncation from 'double' to 'float'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(298): warning C4305: '*=' : truncation from 'double' to 'float'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(302): warning C4305: '*=' : truncation from 'double' to 'float'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(303): warning C4305: '*=' : truncation from 'double' to 'float'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(307): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(314): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(315): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(316): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(324): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(214): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(215): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(216): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(261): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(262): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(263): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(264): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(303): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(310): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(311): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(312): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(320): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(325): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(321): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(338): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(334): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(339): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(335): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdlib.h(937) : see declaration of 'itoa'
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(346): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(342): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(343): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(344): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(345): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(346): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
      1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(347): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(348): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(349): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(350): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(351): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(373): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(374): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(375): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(376): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(396): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(397): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(398): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(399): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(369): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(370): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(371): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(372): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(392): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(393): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(394): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jacob.mccoy\documents\github\better-pong\my pong\source\main.cpp(395): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\AIE Template_d.exe" /INCREMENTAL /NOLOGO /LIBPATH:./libs AIE_1st_Year_Framework_d.lib kernel32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"bin\AIE Template_d.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\AIE Template_d.lib" /MACHINE:X86 obj\main.obj
          AIE_1st_Year_Framework_d.lib(SOIL.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
@@ -77,4 +73,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.39
+Time Elapsed 00:00:01.36
