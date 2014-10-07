@@ -66,7 +66,7 @@ struct Paddle1
 	{
 		if (IsKeyDown(iMoveUpKey))
 		{
-			y += ySpeed * a_fDeltaTime;;
+			y += ySpeed * a_fDeltaTime;
 			if (y > iScreenHeight - 105)
 			{
 				y = iScreenHeight - 105;
